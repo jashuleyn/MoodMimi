@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MoodMimi | Emotion-Aware Chatbot</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <section id="landingPage" class="landing-page">
+    <nav class="landing-nav">
+      <div class="nav-brand">
+        <div class="mini-mascot">😊</div>
+        <span>MoodMimi</span>
+      </div>
+      <button id="navTalkBtn" class="nav-cta" type="button">Talk to MoodMimi</button>
+    </nav>
+
+    <main class="landing-hero">
+      <div class="hero-copy">
+        <p class="eyebrow">emotion-aware chatbot</p>
+        <h1 class="hero-title">Understand your feelings, one message at a time.</h1>
+        <p class="hero-description">
+          MoodMimi is a chatbot companion that reads the emotional tone of your message,
+          reflects what you may be feeling, and suggests small activities to help you process it.
+        </p>
+
+        <div class="hero-actions">
+          <button id="heroTalkBtn" class="primary-cta" type="button">Talk to MoodMimi</button>
+          <button id="previewBtn" class="secondary-cta" type="button">See how it works</button>
+        </div>
+
+        <div class="hero-note">
+          <span>💛</span>
+          <p>Not a diagnosis — just emotional tone detection and supportive reflection.</p>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-label="MoodMimi preview card">
+        <div class="hero-mascot-wrap">
+          <div class="hero-mascot">
+            <div class="hero-mascot-face">😄</div>
+          </div>
+        </div>
+
+        <div class="demo-chat-card">
+          <div class="demo-bubble demo-user">I am so proud of myself right now!</div>
+          <div class="demo-bubble demo-bot">
+            I’m sensing happiness and confidence from your message. That’s worth celebrating!
+          </div>
+          <div class="demo-emotion-card">
+            <div>
+              <span class="demo-label">Detected Emotion</span>
+              <strong>Happiness</strong>
+            </div>
+            <div class="demo-meter"><span style="width: 92%"></span></div>
+            <small>Confidence: 92%</small>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <section id="howItWorks" class="features-section">
+      <article class="feature-card">
+        <span>💬</span>
+        <h2>Chat naturally</h2>
+        <p>Type what you feel like you would with a friendly chatbot.</p>
+      </article>
+      <article class="feature-card">
+        <span>🧠</span>
+        <h2>Detect emotion</h2>
+        <p>MoodMimi analyzes your text and shows the likely emotional tone.</p>
+      </article>
+      <article class="feature-card">
+        <span>🌱</span>
+        <h2>Reflect gently</h2>
+        <p>Get a soft response, confidence score, and mini activity suggestion.</p>
+      </article>
+    </section>
+  </section>
+
+  <div id="chatApp" class="app-shell app-hidden">
+    <aside class="sidebar">
+      <div class="brand-card">
+        <div id="mascot" class="mascot neutral" aria-label="MoodMimi mascot">
+          <div class="mascot-face">
+            <span id="mascotEmoji">🙂</span>
+          </div>
+        </div>
+        <div>
+          <p class="eyebrow">emotion-aware chatbot</p>
+          <h1>MoodMimi</h1>
+          <p class="small-copy">A chatbot that helps users understand the emotional tone of their messages.</p>
+        </div>
+      </div>
+
+      <section class="panel emotion-panel">
+        <div class="panel-header">
+          <h2>Current Emotion</h2>
+          <span id="modelBadge" class="badge">checking model...</span>
+        </div>
+        <div id="emotionName" class="emotion-name">Neutral</div>
+        <div class="confidence-wrap">
+          <div class="confidence-top">
+            <span>Confidence</span>
+            <strong id="confidenceText">0%</strong>
+          </div>
+          <div class="meter">
+            <div id="confidenceBar" class="meter-fill" style="width: 0%"></div>
+          </div>
+        </div>
+        <p id="toneText" class="tone-text">Start a chat to detect emotional tone.</p>
+        <div class="suggestion-box">
+          <strong>Mini activity</strong>
+          <p id="suggestionText">MoodMimi will suggest a reflection after each message.</p>
+        </div>
+        <div id="scoreList" class="score-list"></div>
+      </section>
+
+      <section class="panel history-panel">
+        <div class="panel-header">
+          <h2>Mood History</h2>
+          <button id="clearHistoryBtn" class="ghost-btn" type="button">Clear</button>
+        </div>
+        <div id="moodBars" class="mood-bars empty">No history yet.</div>
+      </section>
+    </aside>
+
+    <main class="chat-card">
+      <header class="chat-header">
+        <div>
+          <p class="eyebrow">prototype chat</p>
+          <h2>Talk to MoodMimi</h2>
+        </div>
+        <div class="chat-header-actions">
+          <button id="backToLandingBtn" class="ghost-btn" type="button">Back</button>
+          <div class="status-pill">
+            <span class="status-dot"></span>
+            Local app
+          </div>
+        </div>
+      </header>
+
+      <div id="chatWindow" class="chat-window" aria-live="polite">
+        <div class="message bot-message">
+          <div class="avatar">💛</div>
+          <div class="bubble">
+            <p>Hi, I’m MoodMimi! Tell me what’s on your mind, and I’ll help you understand the emotion behind your message.</p>
+            <small>Not a diagnosis — just emotional tone detection.</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="quick-prompts" aria-label="Sample messages">
+        <button type="button" data-prompt="I feel so tired and alone today.">Sad sample</button>
+        <button type="button" data-prompt="I am so proud of myself right now!">Happy sample</button>
+        <button type="button" data-prompt="Why is this so confusing? I don't get it.">Confused sample</button>
+        <button type="button" data-prompt="This is so unfair and I am really mad.">Angry sample</button>
+      </div>
+
+      <form id="chatForm" class="chat-form">
+        <textarea id="messageInput" placeholder="Type your message here..." rows="2" maxlength="2000"></textarea>
+        <button id="sendBtn" type="submit">Send</button>
+      </form>
+    </main>
+  </div>
+
+  <script src="/static/script.js?v=landing2"></script>
+</body>
+</html>

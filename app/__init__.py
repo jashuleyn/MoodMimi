@@ -1,0 +1,1 @@
+"""MoodMimi FastAPI app package."""
